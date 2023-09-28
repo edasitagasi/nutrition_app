@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Nutrition } from "./Nutrition";
 import { LoaderPage } from "./LoaderPage";
 import image from './foodpic.jpg';
+import Swal from "sweetalert2";
 import './App.css';
 
 function App() {
@@ -12,8 +13,12 @@ function App() {
   const [myNutrition, setMyNutrition] = useState();
   const [stateLoader, setStateLoader] = useState(false);
 
-  const APP_ID = 'dc43f5c9';
-  const APP_KEY = '41004f36187693a52846881269bea7f0';
+  const myAlert = () => {
+    Swal.fire('Enter quantity + name of ingredient')
+  }
+
+  const APP_ID = '1002871d';
+  const APP_KEY = '8557c80ca77dab876714b8549f530f08';
   const APP_URL = 'https://api.edamam.com/api/nutrition-details'
 
   const fetchData = async (ingr) => {
@@ -33,8 +38,8 @@ function App() {
       const data = await response.json();
       setMyNutrition(data);
     } else {
-      setStateLoader(true);
-      alert('ingredients entered incorrectly');
+      setStateLoader(false);
+      myAlert();
     }
   }
 
